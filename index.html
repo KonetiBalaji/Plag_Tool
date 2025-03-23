@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Similarity Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Code Similarity Checker</h1>
+        <p>Upload code files to compare for similarity (e.g., plagiarism detection).</p>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="files">Select Files:</label>
+            <input type="file" name="files[]" multiple accept=".py,.java,.cpp,.c" required><br>
+            <label for="language">Programming Language:</label>
+            <select name="language" id="language">
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="cpp">C++</option>
+                <option value="c">C</option>
+            </select><br>
+            <label for="threshold">Similarity Threshold (%):</label>
+            <input type="number" name="threshold" min="0" max="100" value="70" required><br>
+            <input type="submit" value="Compare Files">
+        </form>
+    </div>
+</body>
+</html>

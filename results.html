@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Similarity Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Similarity Results</h1>
+        <h2>Similarity Matrix</h2>
+        <table>
+            <tr>
+                <th>Code Pair</th>
+                <th>Similarity (%)</th>
+            </tr>
+            {% for pair, similarity in similarity_matrix.items() %}
+            <tr>
+                <td>{{ pair[0] }} vs {{ pair[1] }}</td>
+                <td>{{ similarity | round(2) if similarity is float else similarity }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h2>Similarity Network</h2>
+        <div class="plot">{{ network_html | safe }}</div>
+        <h2>Similarity Heatmap</h2>
+        <div class="plot">{{ heatmap_html | safe }}</div>
+        <a href="/" class="back-link">Back to Upload</a>
+    </div>
+</body>
+</html>
